@@ -2,7 +2,6 @@
 //
 
 #include <coroutine>
-#include <iostream>
 #include "Windows.h"
 
 struct future
