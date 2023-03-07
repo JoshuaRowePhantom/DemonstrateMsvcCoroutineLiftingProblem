@@ -70,11 +70,15 @@ struct symmetric_transfer_awaitable
 
 future my_coroutine1()
 {
+    // This one doesn't fail.
+    // The result of await_suspend is not lifted to the coroutine frame.
     co_await bool_awaitable{};
 }
 
 future my_coroutine2()
 {
+    // This fails because the result of the call to coroutine_handle::address() is not lifted to the coroutine frame,
+    // but the result of the call to await_suspend -is- lifted to the coroutine frame.
     co_await symmetric_transfer_awaitable{};
 }
 
